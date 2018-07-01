@@ -18,6 +18,13 @@ public class StaxStreamProcessor implements AutoCloseable{
         return reader;
     }
 
+    /**
+     * Метод поиска нужного события
+     * @param stopEvent
+     * @param value
+     * @return
+     * @throws XMLStreamException
+     */
     public boolean doUntil(int stopEvent, String value)throws XMLStreamException{
         while(reader.hasNext()){
             int event = reader.next();
@@ -28,6 +35,14 @@ public class StaxStreamProcessor implements AutoCloseable{
         return false;
     }
 
+    /**
+     * Метод сканирует XML либо до конца тэга родителя,
+     * либо до указанного элемента.
+     * @param element
+     * @param parent
+     * @return
+     * @throws XMLStreamException
+     */
     public boolean startElement(String element, String parent) throws XMLStreamException {
         while (reader.hasNext()) {
             int event = reader.next();
@@ -56,6 +71,7 @@ public class StaxStreamProcessor implements AutoCloseable{
             try {
                 reader.close();
             }catch (XMLStreamException e){
+                e.printStackTrace();
             }
         }
     }
